@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from app.models import Url
+
+
+class UrlViewSet(viewsets.ModelViewSet):
+    queryset = Url.objects.all()
+    serializer_class = CinemaHallSerializer
