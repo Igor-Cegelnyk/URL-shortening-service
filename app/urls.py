@@ -1,12 +1,12 @@
 from django.urls import path, include
 from rest_framework import routers
 
+from app.views import UrlViewSet
 
 router = routers.DefaultRouter()
-router.register("genres", UrlViewSet)
+router.register("app", UrlViewSet)
 
 urlpatterns = [path("", include(router.urls))]
 
 
-
-app_name = "taxi"
+app_name = "app"
