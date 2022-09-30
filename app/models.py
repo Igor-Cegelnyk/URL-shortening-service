@@ -17,7 +17,7 @@ class Url(models.Model):
     time_click = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=256, blank=True)
 
     def clicked(self):
         self.clicks += 1
