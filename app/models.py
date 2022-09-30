@@ -1,5 +1,6 @@
 import base64
 import uuid
+from datetime import datetime
 
 from django.db import models
 
@@ -11,10 +12,12 @@ class Url(models.Model):
     url_hash = models.CharField(max_length=256, blank=True)
     short_url = models.URLField(unique=True, blank=True)
     clicks = models.IntegerField(default=0)
+    time_click = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def clicked(self):
         self.clicks += 1
+        self.time_click = datetime.now()
         self.save()
 
     def save(self, *args, **kwargs):
