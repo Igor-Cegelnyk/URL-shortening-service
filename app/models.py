@@ -4,6 +4,8 @@ from datetime import datetime
 
 from django.db import models
 
+from user.models import User
+
 HOST_NAME = "http://127.0.0.1:8000/redirect/"
 
 
@@ -14,6 +16,8 @@ class Url(models.Model):
     clicks = models.IntegerField(default=0)
     time_click = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def clicked(self):
         self.clicks += 1
