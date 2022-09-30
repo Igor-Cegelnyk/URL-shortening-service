@@ -1,12 +1,10 @@
 from django.urls import path, re_path
-from rest_framework.authtoken import views
 
-from app.views import url_lis, UrlView
-
+from app.views import url_lis, UrlView, url_detail
 
 urlpatterns = [
     path("api/", url_lis),
-    path("api-token-auth/", views.obtain_auth_token),
+    path("api/<int:pk>/", url_detail),
     re_path(r"^redirect/(?P<hash_>.+)$", UrlView.as_view()),
 
 ]
