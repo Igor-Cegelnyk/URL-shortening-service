@@ -3,14 +3,19 @@ import uuid
 
 from django.db import models
 
-HOST_NAME = 'http://localhost:8000/'
+HOST_NAME = "http://127.0.0.1:8000/redirect/"
 
 
 class Url(models.Model):
-    url = models.EmailField(unique=True)
-    url_hash = models.CharField(max_length=10, unique=True, db_index=True)
-    short_url = models.EmailField(unique=True, blank=True)
+    url = models.URLField(unique=True)
+    url_hash = models.CharField(max_length=256, blank=True)
+    short_url = models.URLField(unique=True, blank=True)
+    clicks = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def clicked(self):
+        self.clicks += 1
+        self.save()
 
     def save(self, *args, **kwargs):
         self.url_hash = self.generate_hash()
